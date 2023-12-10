@@ -11,17 +11,17 @@ const Navbar = () => {
     {
       id: 1,
       link: "login-usuarios",
-      name: "usuarios",
+      name: "acceso usuarios",
     },
     {
       id: 2,
       link: "comercios",
-      name: "comercios",
+      name: "acceso comercios",
     },
     {
       id: 3,
       link: "administradores",
-      name: "administradores",
+      name: "acceso administradores",
     },
   ];
 
