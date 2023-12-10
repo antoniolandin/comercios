@@ -32,7 +32,7 @@ export default function Register() {
             .then((data) => console.log(data))
         
         
-        router.push("/")
+        router.push("/login-usuarios")
     }
 
 

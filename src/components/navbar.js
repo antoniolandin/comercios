@@ -10,23 +10,18 @@ const Navbar = () => {
   const links = [
     {
       id: 1,
-      link: "home",
+      link: "login-usuarios",
+      name: "usuarios",
     },
     {
       id: 2,
-      link: "about",
+      link: "comercios",
+      name: "comercios",
     },
     {
       id: 3,
-      link: "portfolio",
-    },
-    {
-      id: 4,
-      link: "experience",
-    },
-    {
-      id: 5,
-      link: "contact",
+      link: "administradores",
+      name: "administradores",
     },
   ];
 
@@ -38,8 +33,6 @@ const Navbar = () => {
           <a
             className="link-underline link-underline-black"
             href=""
-            target="_blank"
-            rel="noreferrer"
           >
             Logo
           </a>
@@ -47,12 +40,12 @@ const Navbar = () => {
       </div>
 
       <ul className="hidden md:flex">
-        {links.map(({ id, link }) => (
+        {links.map(({ id, link, name }) => (
           <li
             key={id}
             className="nav-links px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 hover:text-white duration-200 link-underline"
           >
-            <Link href={link}>{link}</Link>
+            <Link href={link}>{name}</Link>
           </li>
         ))}
       </ul>
