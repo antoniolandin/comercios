@@ -5,19 +5,12 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 
-export default function Login() {
+export default function Register() {
 
     const router = useRouter()
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-    const redirigir = (code) => {
-        console.log("Code", code)
-        if (code == 200) {
-            router.push("/inicio")
-        }
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,7 +19,8 @@ export default function Login() {
             password: password,
         }
 
-        fetch("/api/login", {
+
+        fetch("/api/register", {
             method: "POST",
             headers: {
             //Authorization: `Bearer ${tokenJWT}`
@@ -34,8 +28,11 @@ export default function Login() {
             },
             body: JSON.stringify(user)
         })
-           .then((res) => res.json())
-           .then((data) => redirigir(data.status))
+            .then((res) => res.json())
+            .then((data) => console.log(data))
+        
+        
+        router.push("/")
     }
 
 
@@ -43,7 +40,7 @@ export default function Login() {
         <section className="bg-[#4586ef]">
             <div className="w-full bg-blue rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <p className="text-white">Inicia sesión</p>
+                <p className="text-white">Regístrate</p>
                     <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Correo Electrónico" required="" />
@@ -52,9 +49,9 @@ export default function Login() {
                             <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="Contraseña" x-model="password" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                         </div>
                         <div className="flex justify-between">
-                            <Link href="/registrarse" className="align-start text-xs font-thin text-white hover:underline">Crear una cuenta</Link>
+                            <Link href="/" className="align-start text-xs font-thin text-white hover:underline">Ya tengo una cuenta</Link>
                         </div>
-                        <button type="submit" className="w-full text-blue-600 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center">Entrar</button>
+                        <button type="submit" className="w-full text-blue-600 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center">Registrar</button>
                     </form>
                 </div>
             </div>
