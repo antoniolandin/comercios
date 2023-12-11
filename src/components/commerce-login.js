@@ -50,7 +50,7 @@ export default function Login() {
                             <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="Contraseña" x-model="password" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                         </div>
                         <div className="flex justify-between">
-                            <Link href="/register-usuarios" className="align-start text-xs font-thin text-white hover:underline">Crear una cuenta</Link>
+                            <Link href="/commerce-help" className="align-start text-xs font-thin text-white hover:underline">¿Como registro mi negocio?</Link>
                         </div>
                         <button type="submit" className="w-full text-blue-600 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center">Entrar</button>
                     </form>
