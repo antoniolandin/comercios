@@ -1,9 +1,8 @@
-import Login from '@/components/user-login'
 
-export default function Loguear() {
+export default function Usuarios() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-       <Login />
+        <h1>Usuarios</h1>
     </main>
   )
 }

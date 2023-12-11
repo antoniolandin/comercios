@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-
 export default function Login() {
 
     const router = useRouter()
@@ -15,7 +14,7 @@ export default function Login() {
     const redirigir = (code) => {
         console.log("Code", code)
         if (code == 200) {
-            router.push("/usuarios")
+            router.push("/comercios")
         }
     }
 
@@ -26,7 +25,7 @@ export default function Login() {
             password: password,
         }
 
-        fetch("/api/user-login", {
+        fetch("/api/commerce-login", {
             method: "POST",
             headers: {
             //Authorization: `Bearer ${tokenJWT}`
@@ -37,7 +36,6 @@ export default function Login() {
            .then((res) => res.json())
            .then((data) => redirigir(data.status))
     }
-
 
     return (
         <section className="bg-[#4586ef]">
@@ -58,7 +56,6 @@ export default function Login() {
                     </form>
                 </div>
             </div>
-
         </section>
     )
 }

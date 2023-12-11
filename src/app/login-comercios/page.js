@@ -1,4 +1,4 @@
-import Login from '@/components/user-login'
+import Login from '@/components/commerce-login'
 
 export default function Loguear() {
   return (

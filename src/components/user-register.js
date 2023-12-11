@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-
 export default function Register() {
 
     const router = useRouter()
@@ -16,7 +15,6 @@ export default function Register() {
     const [city, setCity] = useState("")
     const [hobbies, setHobbies] = useState("")
     const [reciveOffers, setReciveOffers] = useState(false)
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,8 +28,7 @@ export default function Register() {
             reciveOffers: reciveOffers
         }
 
-
-        fetch("/api/register", {
+        fetch("/api/user-register", {
             method: "POST",
             headers: {
             //Authorization: `Bearer ${tokenJWT}`
@@ -42,10 +39,8 @@ export default function Register() {
             .then((res) => res.json())
             .then((data) => console.log(data))
         
-        
         router.push("/login-usuarios")
     }
-
 
     return (
         <section className="bg-[#4586ef]">
@@ -79,7 +74,7 @@ export default function Register() {
 
                         <div className="flex items-center">
                             <input onChange={(e) => setReciveOffers(e.target.value)} type="checkbox" name="reciveOffers" id="reciveOffers" className="rounded text-primary-600 focus:ring-primary-600" />
-                            <label htmlFor="reciveOffers" className="ml-2 block text-sm text-gray-900">
+                            <label htmlFor="reciveOffers" className="ml-2 block text-sm text-white-900">
                                 Recibir ofertas
                             </label>
                         </div>
@@ -91,7 +86,6 @@ export default function Register() {
                     </form>
                 </div>
             </div>
-
         </section>
     )
 }
