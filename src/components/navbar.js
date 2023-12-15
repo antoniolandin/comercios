@@ -32,7 +32,7 @@ const Navbar = () => {
         <h1 className="text-5xl font-signature ml-2">
           <a
             className="link-underline link-underline-black"
-            href=""
+            href="/home"
           >
             Logo
           </a>
