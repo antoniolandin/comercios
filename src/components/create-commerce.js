@@ -11,7 +11,7 @@ export default function Crear() {
     const [title, setTitle] = useState("")
     const [city, setCity] = useState("")
     const [summary, setSummary] = useState("")
-    const [mail, setMail] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     const redirigir = (code) => {
@@ -28,14 +28,14 @@ export default function Crear() {
         e.preventDefault();
         
         {/*Validar que los campos no estén vacíos*/}
-        if(title != "" && city != "" && summary != ""){
+        if(title != "" && city != "" && summary != "" & email != "" && password != ""){
 
             {/*Crear el objeto con los datos del formulario*/}
             const comercio = {
                 title: title,
                 city: city,
                 summary: summary,
-                mail: mail,
+                email: email,
                 password: password
             }
 
@@ -58,7 +58,7 @@ export default function Crear() {
             setTitle("")
             setCity("")
             setSummary("")    
-            setMail("")
+            setEmail("")
             setPassword("")
         }
         
@@ -88,7 +88,7 @@ export default function Crear() {
 
                         {/*Mail del dueño del comercio*/}
                         <div>
-                            <input onChange={(e) => setMail(e.target.value)} type="email" name="email" id="email" placeholder="Mail" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
+                            <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" placeholder="Mail" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
                         </div>
 
                         {/*Contraseña del dueño del comercio*/}
