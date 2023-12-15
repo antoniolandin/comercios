@@ -14,7 +14,7 @@ export default function Dashboard() {
 
             {/*Tabla para mostrar los comercios*/}
             <div class="flex-auto">
-              <Commerce />
+              <p className='text-black'>Comercios</p>
             </div>
 
           </div>

@@ -11,11 +11,16 @@ export default function Crear() {
     const [title, setTitle] = useState("")
     const [city, setCity] = useState("")
     const [summary, setSummary] = useState("")
+    const [mail, setMail] = useState("")
+    const [password, setPassword] = useState("")
 
     const redirigir = (code) => {
         console.log("Code", code)
         if (code == 200) {
-            router.push("/admin")
+            alert("Comercio creado correctamente")
+        }
+        else{
+            alert("Error al crear el comercio: el mail ya está en uso")
         }
     }
 
@@ -29,7 +34,9 @@ export default function Crear() {
             const comercio = {
                 title: title,
                 city: city,
-                summary: summary
+                summary: summary,
+                mail: mail,
+                password: password
             }
 
             {/*Enviar los datos del formulario al servidor*/}
@@ -46,9 +53,13 @@ export default function Crear() {
     
             {/*Limpiar los campos del formulario*/}
             document.getElementById("crear-comercio").reset();
+
+            {/*Limpiar los estados del formulario*/}
             setTitle("")
             setCity("")
             setSummary("")    
+            setMail("")
+            setPassword("")
         }
         
     }
@@ -62,17 +73,27 @@ export default function Crear() {
 
                         {/*Título del comercio*/}
                         <div>
-                            <input onChange={(e) => setTitle(e.target.value)} type="text" name="titulo" id="titulo" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Título" required="" />
+                            <input onChange={(e) => setTitle(e.target.value)} type="text" name="titulo" id="titulo" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Título" required />
                         </div>
 
                         {/*Ciudad del comercio*/}
                         <div>
-                            <input onChange={(e) => setCity(e.target.value)} type="text" name="city" id="city" placeholder="Ciudad" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                            <input onChange={(e) => setCity(e.target.value)} type="text" name="city" id="city" placeholder="Ciudad" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                         </div>
 
                         {/*Resumen del comercio*/}
                         <div>
-                            <textarea onChange={(e) => setSummary(e.target.value)} name="resumen" id="resumen" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Resumen" required=""></textarea>
+                            <textarea onChange={(e) => setSummary(e.target.value)} name="resumen" id="resumen" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Resumen" required></textarea>
+                        </div>
+
+                        {/*Mail del dueño del comercio*/}
+                        <div>
+                            <input onChange={(e) => setMail(e.target.value)} type="email" name="email" id="email" placeholder="Mail" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
+                        </div>
+
+                        {/*Contraseña del dueño del comercio*/}
+                        <div>
+                            <input onChange={(e) => setPassword(e.target.value)}  type="password" name="password" id="password" placeholder="Contraseña" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
                         </div>
 
                         {/*Botón para crear el comercio*/}
