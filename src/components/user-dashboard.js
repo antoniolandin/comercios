@@ -45,6 +45,18 @@ export default function Dashboard(usuario) {
     {/* Mostrar los comercios si hay comercios */}
     if(comercios.length > 0){
 
+        {/* Buscador de comercios en función del nombre */}
+        const barrabusqueda = (e) => {
+            const texto = e.target.value.toLowerCase()
+            const comerciosFiltrados = comercios.filter((item) => {
+                if(item.name.toLowerCase().includes(texto)){
+                    return item
+                }
+            })
+            setComercios(comerciosFiltrados)
+        }
+
+
         const emailsComercios = comercios.map((item) => {
             return {
                 email: item.email,
@@ -57,6 +69,12 @@ export default function Dashboard(usuario) {
                 
                 {/*Mostrar el usuario*/}
                 {mostrarUsuario()}
+
+                {/*Mostrar el buscador de comercios*/}
+                <div className="flex flex-col space-y-4">
+                    <label htmlFor="search" className="text-black font-bold text-xl">Buscar comercio</label>
+                    <input type="text" id="search" className="text-black font-bold text-xl" onChange={(e) => barrabusqueda(e)} />
+                </div>
 
                 <div className="flex flex-col space-y-4">
 
