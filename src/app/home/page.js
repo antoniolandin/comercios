@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function Home() {
   return (
 
@@ -14,7 +16,12 @@ export default function Home() {
             <div className="flex-auto mt-5">
                 <img src="/online-shopping-cart.jpg" alt="Imagen de inicio" className="rounded-lg" />
             </div>
-            
+
+            {/*Link a la página de usuarios*/}
+            <div className="flex-auto mt-5 text-center">
+              <Link href="/usuarios"><p className="text-blue-500 hover:text-blue-800 font-bold text-4xl">Ver los comercios</p></Link>
+            </div>
+
         </div>
     </main>
   )

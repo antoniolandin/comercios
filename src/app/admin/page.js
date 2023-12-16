@@ -1,5 +1,4 @@
 import Crear from '@/components/create-commerce'
-import Commerce from '@/components/show-commerce'
 
 export default function Dashboard() {
     return (
