@@ -2,10 +2,11 @@
 
 import { useState } from "react"
 import Link from 'next/link'
+import ShowCommerce from "@/components/show-commerce"
 
 export default function Dashboard(usuario) {
 
-    {/* UseState para guardar el comercio */}
+    {/* UseState para guardar los comercios */}
     const [comercios, setComercios] = useState([])
 
     fetch("/api/get-commerces", {
@@ -43,14 +44,11 @@ export default function Dashboard(usuario) {
 
     {/* Mostrar los comercios si hay comercios */}
     if(comercios.length > 0){
-        const comerciosList = comercios.map((item) => {
+
+        const emailsComercios = comercios.map((item) => {
             return {
-                title: item.title,
-                city: item.city,
-                summary: item.summary,
-                activity: item.activity,
                 email: item.email,
-                password: item.password
+                visible: item.visible
             }
         })
 
@@ -61,18 +59,19 @@ export default function Dashboard(usuario) {
                 {mostrarUsuario()}
 
                 <div className="flex flex-col space-y-4">
+
                     {/*Mostrar los comercios*/}
-                    {comerciosList.map((comercio) => {
-                        return (
-                            <div key={comercio.email} className="mt-5 bg-gradient-to-r from-yellow-200 via-green-200 to-green-500 flex flex-col space-y-4 pt-4 pb-6 shadow-xl ring-2 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-7">
-                                <div className="flex flex-col space-y-4">
-                                    <p className="text-black font-bold text-xl">{comercio.title}</p>
-                                    <p className="text-slate-700">{comercio.summary}</p>
-                                    <p className="text-slate-700">Ciudad: {comercio.city}</p>
-                                </div>
-                            </div>
-                        )
-                    })}
+                    {
+                        emailsComercios.map((comercio) => {
+
+                            {/* Mostrar el comercio si es visible */}
+                            if (comercio.visible == true) {
+                                return (
+                                    <ShowCommerce key={comercio.email} email={comercio.email}/>
+                                )
+                            }
+                        })
+                    }
                 </div>
             </section>
         )

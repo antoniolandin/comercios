@@ -17,9 +17,6 @@ export default function AdminDashboard() {
               <Dashboard />
             </div>
 
-
-
-
           </div>
       </main>
     )

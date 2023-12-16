@@ -1,14 +1,13 @@
 "use client"
 
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function Crear() {
 
-    const [title, setTitle] = useState("")
-    const [city, setCity] = useState("")
-    const [summary, setSummary] = useState("")
-    const [activity, setActivity] = useState("")
+    const [name, setName] = useState("")
+    const [CIF, setCIF] = useState("")
+    const [address, setAddress] = useState("")
+    const [phone, setPhone] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -45,19 +44,29 @@ export default function Crear() {
             alert("El mail ya está en uso")
             console.log("El mail ya está en uso")
         }
-        else if(title != "" && city != "" && summary != "" & activity != "" & email != "" && password != "" ){ {/*Validar que los campos no estén vacíos*/}
+        else if(name != "" && CIF != "" && address != "" & phone != "" & email != "" && password != "" ){ {/* Validar que los campos no estén vacíos */}
 
-            {/*Crear el objeto con los datos del formulario*/}
+            {/* Crear el objeto con los datos del formulario */}
             const comercio = {
-                title: title,
-                city: city,
-                summary: summary,
-                activity: activity,
+                name: name,
+                CIF: CIF,
+                address: address,
+                phone: phone,
                 email: email,
-                password: password
+                password: password,
+                visible: false,
+
+                /* Datos que se añadirán en el futuro */
+                city: "",
+                summary: "",
+                activity: "",
+                title: "",
+                score: 0,
+                votes: 0,
+                comments: []
             }
 
-            {/*Enviar los datos del formulario al servidor*/}
+            {/* Enviar los datos del formulario al servidor */}
             fetch("/api/create-commerce", {
                 method: "POST",
                 headers: {
@@ -69,18 +78,17 @@ export default function Crear() {
                .then((res) => res.json())
                .then((data) => redirigir(data.status))
     
-            {/*Limpiar los campos del formulario*/}
+            {/* Limpiar los campos del formulario */}
             document.getElementById("crear-comercio").reset();
 
-            {/*Limpiar los estados del formulario*/}
-            setTitle("")
-            setCity("")
-            setSummary("")   
-            setActivity("") 
+            {/* Limpiar los estados del formulario */}
+            setName("")
+            setCIF("")
+            setAddress("")   
+            setPhone("") 
             setEmail("")
             setPassword("")
         }
-        
     }
 
     return (
@@ -96,32 +104,32 @@ export default function Crear() {
                     {/* Formulario */}
                     <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit} id="crear-comercio">
 
-                        {/*Título del comercio*/}
+                        {/* Nombre del comercio */}
                         <div>
-                            <input onChange={(e) => setTitle(e.target.value)} type="text" name="titulo" id="titulo" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Título" required />
+                            <input onChange={(e) => setName(e.target.value)} type="text" name="nombre" id="nombre" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nombre" required />
                         </div>
 
-                        {/*Ciudad del comercio*/}
+                        {/* CIF del comercio */}
                         <div>
-                            <input onChange={(e) => setCity(e.target.value)} type="text" name="city" id="city" placeholder="Ciudad" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                            <input onChange={(e) => setCIF(e.target.value)} type="text" name="CIF" id="CIF" placeholder="CIF" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                         </div>
 
-                        {/*Resumen del comercio*/}
+                        {/* Dirección del comercio */}
                         <div>
-                            <textarea onChange={(e) => setSummary(e.target.value)} name="resumen" id="resumen" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Resumen" required></textarea>
+                            <input onChange={(e) => setAddress(e.target.value)} type="text" name="direccion" id="direccion" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required />
                         </div>
 
-                        {/*Actividad del comercio*/}
+                        {/* Teléfono del comercio */}
                         <div>
-                            <input onChange={(e) => setActivity(e.target.value)} type="text" name="activity" id="activity" placeholder="Actividad" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                            <input onChange={(e) => setPhone(e.target.value)} type="text" name="telefono" id="telefono" placeholder="Teléfono" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                         </div>
 
-                        {/*Mail del dueño del comercio*/}
+                        {/* E-mail del dueño del comercio */}
                         <div>
                             <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" placeholder="Mail" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
                         </div>
 
-                        {/*Contraseña del dueño del comercio*/}
+                        {/* Contraseña del dueño del comercio */}
                         <div>
                             <input onChange={(e) => setPassword(e.target.value)}  type="password" name="password" id="password" placeholder="Contraseña" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
                         </div>
