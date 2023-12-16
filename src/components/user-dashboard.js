@@ -64,9 +64,9 @@ export default function Dashboard(usuario) {
                     {/*Mostrar los comercios*/}
                     {comerciosList.map((comercio) => {
                         return (
-                            <div key={comercio.email} className="flex flex-col space-y-4 pt-10 pb-8 shadow-xl ring-2 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
+                            <div key={comercio.email} className="mt-5 bg-gradient-to-r from-yellow-200 via-green-200 to-green-500 flex flex-col space-y-4 pt-4 pb-6 shadow-xl ring-2 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-7">
                                 <div className="flex flex-col space-y-4">
-                                    <p className="text-black font-bold">{comercio.title}</p>
+                                    <p className="text-black font-bold text-xl">{comercio.title}</p>
                                     <p className="text-slate-700">{comercio.summary}</p>
                                     <p className="text-slate-700">Ciudad: {comercio.city}</p>
                                 </div>
