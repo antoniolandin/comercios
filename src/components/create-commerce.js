@@ -84,10 +84,16 @@ export default function Crear() {
     }
 
     return (
-        <section className="bg-[#4586ef]">
-            <div className="w-full bg-blue rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <section>
+            <div className="w-full bg-blue rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 from-gray-900 to-gray-600 bg-gradient-to-r">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <p className="text-white">Crear un nuevo comercio</p>
+
+                    {/* Título */}
+                    <div>
+                        <p className="text-white text-xl font-bold">Crear comercio</p>
+                    </div>
+
+                    {/* Formulario */}
                     <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit} id="crear-comercio">
 
                         {/*Título del comercio*/}
@@ -121,7 +127,7 @@ export default function Crear() {
                         </div>
 
                         {/*Botón para crear el comercio*/}
-                        <button type="submit" className="w-full text-blue-600 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center">Crear comercio</button>
+                        <button type="submit" className="w-full text-black font-semibold bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none rounded-full text-sm px-5 py-2.5 text-center">Crear comercio</button>
 
                     </form>
                 </div>

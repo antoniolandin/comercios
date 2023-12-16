@@ -1,20 +1,24 @@
 import Crear from '@/components/create-commerce'
+import Dashboard from '@/components/admin-dashboard'
 
-export default function Dashboard() {
+export default function AdminDashboard() {
     return (
       <main className="flex min-h-screen flex-col items-center p-24">
 
-          <div className="flex flex-row">
+          <div className="flex flex-row space-x-10">
 
             {/*Formulario para crear un comercio nuevo*/}
             <div className="flex-auto">
               <Crear />
             </div>
 
-            {/*Tabla para mostrar los comercios*/}
+            {/*Dashboard de administrador*/}
             <div className="flex-auto">
-              <p className='text-black'>Comercios</p>
+              <Dashboard />
             </div>
+
+
+
 
           </div>
       </main>
