@@ -41,11 +41,11 @@ export default function Dashboard() {
                     {/*Mostrar los comercios*/}
                     {comerciosList.map((comercio) => {
                         return (
-                            <div key={comercio.email} className="flex flex-col space-y-4 bg-blue-900 rounded ring-3 ring-slate-700 shadow-2xl p-5">
+                            <div key={comercio.email} className="flex flex-col space-y-4 pt-10 pb-8 shadow-xl ring-2 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
                                 <div className="flex flex-col space-y-4">
-                                    <p className="text-white font-bold">{comercio.title}</p>
-                                    <p className="text-slate-300">{comercio.summary}</p>
-                                    <p className="text-slate-300">Ciudad: {comercio.city}</p>
+                                    <p className="text-black font-bold">{comercio.title}</p>
+                                    <p className="text-slate-700">{comercio.summary}</p>
+                                    <p className="text-slate-700">Ciudad: {comercio.city}</p>
                                 </div>
                             </div>
                         )
