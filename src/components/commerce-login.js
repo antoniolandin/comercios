@@ -14,7 +14,7 @@ export default function Login() {
     const redirigir = (code) => {
         console.log("Code", code)
         if (code == 200) {
-            router.push("/comercios")
+            router.push("/comercios?email=" + email)
         }
     }
 

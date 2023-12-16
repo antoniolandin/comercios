@@ -6,7 +6,7 @@ export default function Home() {
         <div className="flex min-h-screen flex-col items-center justify-center p-24">
 
             {/*Título de la página*/} 
-            <div clasName="text-center w-full">
+            <div className="text-center w-full">
                 <p className="text-black font-extrabold text-3xl">Bienvenido a la página de inicio</p>
             </div>
 
