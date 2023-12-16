@@ -38,4 +38,8 @@ next-env.d.ts
 # data
 /data/*
 
+# enunciado de la práctica
 enunciado.pdf
+
+# vscode
+.vscode
