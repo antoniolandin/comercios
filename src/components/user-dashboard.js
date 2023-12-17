@@ -58,8 +58,11 @@ export default function Dashboard(usuario) {
         }
     }
 
+    {/* Ver cuantos comercios visibles hay */}
+    const comerciosVisibles = comercios.filter((item) => item.visible == true)
+
     {/* Mostrar los comercios si hay comercios */}
-    if(comercios.length > 0){
+    if(comerciosVisibles.length > 0){
 
         {/* Buscador de comercios en función del nombre */}
         const barrabusqueda = (busqueda) => {
@@ -114,8 +117,16 @@ export default function Dashboard(usuario) {
     else{ {/* Mostrar que no hay comercios si no hay comercios */}
         return (
             <section>
-                <h1 className="text-black text-4xl mb-4">Comercios</h1>
-                <h1 className="text-black">No hay comercios</h1>
+
+                {/*Mostrar el usuario*/}
+                {mostrarUsuario()}
+
+                {/* Mostrar que no hay comercios */}
+                <div className="mt-5">
+                    <h1 className="text-black text-4xl mb-4">Comercios</h1>
+                    <h1 className="text-black">No hay comercios</h1>
+                </div>
+                
             </section>
         )
     }

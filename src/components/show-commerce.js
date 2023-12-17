@@ -41,8 +41,7 @@ export default function ShowCommerce(email) {
         }
         else{
 
-            {/* Si el comercio no es visible, mostrar un mensaje diciendo que no está visible */}
-        
+            {/* Si el comercio no es visible, mostrar un mensaje diciendo que no está visible */} 
             return (
                 <section>
                     <h1 className="text-black text-4xl mb-4">Comercio no visible</h1>

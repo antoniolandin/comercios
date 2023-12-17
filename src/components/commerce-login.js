@@ -10,6 +10,7 @@ export default function Login() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [commerces, setCommerces] = useState([])
 
     const redirigir = (code) => {
         console.log("Code", code)
@@ -20,21 +21,41 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const user = {
-            email: email,
-            password: password,
-        }
 
-        fetch("/api/commerce-login", {
-            method: "POST",
+        {/* Comprobar que el comercio existe */}
+        fetch("/api/get-commerces", {
+            method: "GET",
             headers: {
             //Authorization: `Bearer ${tokenJWT}`
             'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user)
+            }
         })
            .then((res) => res.json())
-           .then((data) => redirigir(data.status))
+           .then((data) => setCommerces(data))
+
+        const commerceFiltered = commerces.filter((item) => item.email == email)
+
+        if(commerceFiltered.length == 0){
+            alert("El comercio no existe")
+            console.log("El comercio no existe")
+        }
+        else{
+            const user = {
+                email: email,
+                password: password,
+            }
+    
+            fetch("/api/commerce-login", {
+                method: "POST",
+                headers: {
+                //Authorization: `Bearer ${tokenJWT}`
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user)
+            })
+               .then((res) => res.json())
+               .then((data) => redirigir(data.status))
+        }
     }
 
     return (

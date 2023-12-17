@@ -1,11 +1,15 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from 'next/navigation'
 
 export default function EditCommerce(email) {
 
-    {/* UseState para guardar el comercio */}
-    const [commerces, setCommerces] = useState([])
+    {/* UseState para guardar los comercios filtrados */}
+    const [commercesFiltered, setCommercesFiltered] = useState([])
+
+    {/* UseState para asegurarse de que solo se hace un fetch de la API */}
+    const [fetchDone, setFetchDone] = useState(false)
 
     {/* UseState de todas las variables del comercio */}
     const [name, setName] = useState("")
@@ -14,25 +18,30 @@ export default function EditCommerce(email) {
     const [summary, setSummary] = useState("")
     const [activity, setActivity] = useState("")
 
-    {/* Obtener los comercios */}
-    fetch("/api/get-commerces", {
-        method: "GET",
-        headers: {
-        //Authorization: `Bearer ${tokenJWT}`
-        'Content-Type': 'application/json',
-        }
-    })
-       .then((res) => res.json())
-       .then((data) => setCommerces(data))
+    {/* Router para redirigir al usuario */}
+    const router = useRouter()
 
+    {/* Obtener los comercios solo al cargar la página */}
+    if (!fetchDone) {
+        {/* Obtener los comercios */}
+        fetch("/api/get-commerces", {
+            method: "GET",
+            headers: {
+            //Authorization: `Bearer ${tokenJWT}`
+            'Content-Type': 'application/json',
+            }
+        })
+           .then((res) => res.json())
+           .then((data) => setCommercesFiltered(data.filter((item) => item.email == email.email)))
 
-    {/* Ver si el comercio existe */}
-    const commerceFiltered = commerces.filter((item) => item.email == email.email)
+        {/* Asegurarse de que el fetch de la API se hace una sola vez */}
+        setFetchDone(true)
+    }
 
     {/* Mostrar el comercio si existe */}
-    if(commerceFiltered.length > 0){
+    if(commercesFiltered.length > 0){
 
-        const commerce = commerceFiltered[0]
+        const commerce = commercesFiltered[0]
 
         {/* Función para editar el comercio */}
         const handleSubmit = (e) => {
@@ -77,7 +86,6 @@ export default function EditCommerce(email) {
                 body: JSON.stringify(commerce)
             })
                 .then((res) => res.json())
-                .then((data) => redirigir(data.code))
         }
 
         return (
@@ -123,6 +131,31 @@ export default function EditCommerce(email) {
                         </form>
                     </div>
                 </div>
+
+                <div className="mt-4 text-center">
+                    <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick=
+                                        {() => {
+                                                if(confirm('¿Estás seguro de que quieres borrar el comercio?')){
+                                                    fetch("/api/delete-commerce", {
+                                                    method: "DELETE",
+                                                        headers: {
+                                                        //Authorization: `Bearer ${tokenJWT}`
+                                                        'Content-Type': 'application/json',
+                                                        },
+                                                        body: JSON.stringify(commerce)
+                                                    })
+                                                .then((res) => res.json())
+                                                .then((data) => console.log(data))
+
+                                                router.push("login-comercios")
+
+                                                }
+                                            }
+                                        }>
+                                            Borrar comercio
+                    </button>
+                </div>
+
             </section>
         )
     }

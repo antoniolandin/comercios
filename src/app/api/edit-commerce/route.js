@@ -22,6 +22,8 @@ export async function POST(request) {
 
         {/*Guardar la lista de comercios*/}
         writeFileSync("data/commerce.txt", JSON.stringify(newCommerces))
+
+        return NextResponse.json({message: "Comercio editado correctamente", status: 200})
         
     } catch(e){  
         return NextResponse.json({message: `Error al editar el comercio: ${e}`, status: 400})
