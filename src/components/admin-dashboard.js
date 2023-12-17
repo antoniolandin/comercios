@@ -7,16 +7,24 @@ export default function AdminDashboard() {
     {/* UseState para guardar el comercio */}
     const [comercios, setComercios] = useState([])
 
-    fetch("/api/get-commerces", {
-        method: "GET",
-        headers: {
-        //Authorization: `Bearer ${tokenJWT}`
-        'Content-Type': 'application/json',
-        }
-    })
-       .then((res) => res.json())
-       .then((data) => setComercios(data))
+    {/* UseState para asegurarse de que el fetch de la API se hace una sola vez */}
+    const [fetchDone, setFetchDone] = useState(false)
 
+    {/* Obtener los comercios */}
+
+    if (!fetchDone) {
+        fetch("/api/get-commerces", {
+            method: "GET",
+            headers: {
+            //Authorization: `Bearer ${tokenJWT}`
+            'Content-Type': 'application/json',
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => setComercios(data))
+    
+        setFetchDone(true)
+    }
 
     {/* Mostrar los comercios si hay comercios */}
     if(comercios.length > 0){
@@ -83,6 +91,11 @@ export default function AdminDashboard() {
                                             .then((res) => res.json())
                                             .then((data) => console.log(data))
                                             }
+
+                                            {/* Borrar el comercio del array de comercios */}
+                                            const comerciosFiltrados = comercios.filter((item) => item.email != comercio.email)
+                                            setComercios(comerciosFiltrados)
+
                                         }
                                     }>
                                         Borrar comercio
