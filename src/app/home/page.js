@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
 
             {/*Imágen grande de inicio*/}
             <div className="flex-auto mt-5">
-                <img src="/online-shopping-cart.jpg" alt="Imagen de inicio" className="rounded-lg" />
+                <Image width={500} height={500} src="/online-shopping-cart.jpg" alt="Imagen de inicio" className="rounded-lg" />
             </div>
 
             {/*Link a la página de usuarios*/}
