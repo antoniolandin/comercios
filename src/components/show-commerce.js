@@ -1,6 +1,6 @@
 "use client"
 
-export default function Showcomercio(objeto) {
+export default function ShowCommerce(objeto) {
 
 
     {/* Desempaquetar el objeto */}

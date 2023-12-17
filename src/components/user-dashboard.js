@@ -12,6 +12,9 @@ export default function Dashboard(usuario) {
     {/* UseState para guardar los comercios filtrados */}
     const [comerciosFiltrados, setComerciosFiltrados] = useState([])
 
+    {/* UseState para guardar el usuario */}
+    const [user, setUser] = useState([])
+
     {/* UseState para asegurarse de que el fetch de la API se hace una sola vez */}
     const [fetchDone, setFetchDone] = useState(false)
 
@@ -36,6 +39,18 @@ export default function Dashboard(usuario) {
         .then((res) => res.json())
         .then((data) => set(data))
 
+        {/* Obtener los datos del usuario */}
+        fetch("/api/get-user", {
+            method: "POST",
+            headers: {
+            //Authorization: `Bearer ${tokenJWT}`
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(usuario.usuario)
+        })
+        .then((res) => res.json())
+        .then((data) => setUser(data))
+
         {/* Asegurarse de que el fetch de la API se hace una sola vez */}
         setFetchDone(true)
     }
@@ -46,7 +61,7 @@ export default function Dashboard(usuario) {
             return (
                 <section>
                     <h1 className="text-black text-4xl mb-4">Logueado como:</h1>
-                    <h1 className="text-black">{usuario.usuario}</h1>
+                    <h1 className="text-black font-bold text-xl">{user.name} - {user.email}</h1>
                 </section>
             )
         }
@@ -94,7 +109,7 @@ export default function Dashboard(usuario) {
                     
                     {comerciosFiltrados.map((comercio) => {
                         return (
-                            <ShowCommerce comercio={comercio} />
+                            <ShowCommerce key={comercio.email} comercio={comercio} />
                         )
                     })}
                 </div>
