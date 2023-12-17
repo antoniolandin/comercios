@@ -3,12 +3,22 @@
 import { useState } from "react"
 import Link from 'next/link'
 import ShowCommerce from "@/components/show-commerce"
+import { useCallback } from "react"
 
 export default function Dashboard(usuario) {
 
     {/* UseState para guardar los comercios */}
     const [comercios, setComercios] = useState([])
 
+    {/* UseState para guardar los comercios filtrados */}
+    const [comerciosFiltrados, setComerciosFiltrados] = useState([])
+
+    const set = (data) => {
+        setComercios(data)
+        setComerciosFiltrados(data)
+    }
+
+    {/* Obtener los comercios */}
     fetch("/api/get-commerces", {
         method: "GET",
         headers: {
@@ -17,14 +27,12 @@ export default function Dashboard(usuario) {
         }
     })
        .then((res) => res.json())
-       .then((data) => setComercios(data))
+       .then((data) => set(data))
+
 
 
     const mostrarUsuario = () => {
         if(usuario.usuario != undefined){
-
-            console.log("Usuario", usuario.usuario)
-
             return (
                 <section>
                     <h1 className="text-black text-4xl mb-4">Logueado como:</h1>
@@ -46,18 +54,22 @@ export default function Dashboard(usuario) {
     if(comercios.length > 0){
 
         {/* Buscador de comercios en función del nombre */}
-        const barrabusqueda = (e) => {
-            const texto = e.target.value.toLowerCase()
-            const comerciosFiltrados = comercios.filter((item) => {
-                if(item.name.toLowerCase().includes(texto)){
-                    return item
-                }
-            })
-            setComercios(comerciosFiltrados)
+        
+        const barrabusqueda = (busqueda) => {
+
+            {/* Si la búsqueda está vacía, mostrar todos los comercios */}
+            if(busqueda == ""){
+                setComerciosFiltrados(comercios)
+            }
+            else{
+                {/* Filtrar los comercios en función de la búsqueda */}
+
+                const comerciosFiltrados = comercios.filter((item) => item.name.toLowerCase().includes(busqueda.toLowerCase()))
+                setComerciosFiltrados(comerciosFiltrados)
+            }
         }
 
-
-        const emailsComercios = comercios.map((item) => {
+        const emailsComercios = comerciosFiltrados.map((item) => {
             return {
                 email: item.email,
                 visible: item.visible
@@ -73,7 +85,7 @@ export default function Dashboard(usuario) {
                 {/*Mostrar el buscador de comercios*/}
                 <div className="flex flex-col space-y-4">
                     <label htmlFor="search" className="text-black font-bold text-xl">Buscar comercio</label>
-                    <input type="text" id="search" className="text-black font-bold text-xl" onChange={(e) => barrabusqueda(e)} />
+                    <input type="text" id="search" className="text-black font-bold text-xl" onChange={(e) => barrabusqueda(e.target.value)} />
                 </div>
 
                 <div className="flex flex-col space-y-4">

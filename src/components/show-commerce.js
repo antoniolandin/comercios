@@ -18,7 +18,6 @@ export default function ShowCommerce(email) {
        .then((res) => res.json())
        .then((data) => setCommerces(data))
 
-
     {/* Ver si el comercio existe */}
     const commerceFiltered = commerces.filter((item) => item.email == email.email)
 
