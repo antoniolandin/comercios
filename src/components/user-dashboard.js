@@ -17,8 +17,11 @@ export default function Dashboard(usuario) {
 
     {/* Función para guardar los comercios después del fetch de la API*/}
     const set = (data) => {
-        setComercios(data)
-        setComerciosFiltrados(data)
+
+        const comerciosFiltrados = data.filter((item) => item.visible == true)
+
+        setComercios(comerciosFiltrados)
+        setComerciosFiltrados(comerciosFiltrados)
     }
 
     if(!fetchDone){
@@ -57,11 +60,8 @@ export default function Dashboard(usuario) {
         }
     }
 
-    {/* Ver cuantos comercios visibles hay */}
-    const comerciosVisibles = comercios.filter((item) => item.visible == true)
-
     {/* Mostrar los comercios si hay comercios */}
-    if(comerciosVisibles.length > 0){
+    if(comercios.length > 0){
 
         {/* Buscador de comercios en función del nombre */}
         const barrabusqueda = (busqueda) => {

@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 
-export default function Crear() {
+export default function Crear({comercios, setComercios, comerciosFiltrados, setComerciosFiltrados}) {
 
+    {/* UseStates de todos los campos del formulario */}
     const [name, setName] = useState("")
     const [CIF, setCIF] = useState("")
     const [address, setAddress] = useState("")
@@ -11,7 +12,8 @@ export default function Crear() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const redirigir = (code) => {
+    {/* Función para mostrar el mensaje de éxito o error */}
+    const mostrarMensaje = (code) => {
         console.log("Code", code)
         if (code == 200) {
             alert("Comercio creado correctamente")
@@ -21,22 +23,8 @@ export default function Crear() {
         }
     }
 
-
-    const [comercios, setComercios] = useState([])
-
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        {/*Comprobar que el mail del comercio no esté ya cogido*/}
-        fetch("/api/get-commerces", {
-            method: "GET",
-            headers: {
-            //Authorization: `Bearer ${tokenJWT}`
-            'Content-Type': 'application/json',
-            }
-        })
-           .then((res) => res.json())
-           .then((data) => setComercios(data))
         
         const comerciosFiltered = comercios.filter((item) => item.email == email)
 
@@ -76,7 +64,7 @@ export default function Crear() {
                 body: JSON.stringify(comercio)
             })
                .then((res) => res.json())
-               .then((data) => redirigir(data.status))
+               .then((data) => mostrarMensaje(data.status))
     
             {/* Limpiar los campos del formulario */}
             document.getElementById("crear-comercio").reset();
@@ -88,6 +76,10 @@ export default function Crear() {
             setPhone("") 
             setEmail("")
             setPassword("")
+
+            {/* Añadir el comercio al array de comercios */}
+            setComercios([...comercios, comercio])
+            setComerciosFiltrados([...comerciosFiltrados, comercio])
         }
     }
 
