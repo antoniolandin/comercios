@@ -3,7 +3,6 @@
 import { useState } from "react"
 import Link from 'next/link'
 import ShowCommerce from "@/components/show-commerce"
-import { useCallback } from "react"
 
 export default function Dashboard(usuario) {
 
@@ -78,13 +77,6 @@ export default function Dashboard(usuario) {
             }
         }
 
-        const emailsComercios = comerciosFiltrados.map((item) => {
-            return {
-                email: item.email,
-                visible: item.visible
-            }
-        })
-
         return (
             <section>
                 
@@ -93,23 +85,18 @@ export default function Dashboard(usuario) {
 
                 {/*Mostrar el buscador de comercios*/}
                 <div className="flex flex-col space-y-4 mt-5">
-                    <input onChange={(e) => barrabusqueda(e.target.value)} type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar comercio..." />
+                    <input onChange={(e) => barrabusqueda(e.target.value)} type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar comercio..." />
                 </div>
 
                 <div className="flex flex-col space-y-4">
 
                     {/*Mostrar los comercios*/}
-                    {
-                        emailsComercios.map((comercio) => {
-
-                            {/* Mostrar el comercio si es visible */}
-                            if (comercio.visible == true) {
-                                return (
-                                    <ShowCommerce key={comercio.email} email={comercio.email}/>
-                                )
-                            }
-                        })
-                    }
+                    
+                    {comerciosFiltrados.map((comercio) => {
+                        return (
+                            <ShowCommerce comercio={comercio} />
+                        )
+                    })}
                 </div>
             </section>
         )

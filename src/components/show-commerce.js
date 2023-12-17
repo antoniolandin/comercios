@@ -1,31 +1,15 @@
 "use client"
 
-import { useState } from "react"
+export default function Showcomercio(objeto) {
 
-export default function ShowCommerce(email) {
 
-    {/* UseState para guardar el comercio */}
-    const [commerces, setCommerces] = useState([])
-
-    {/* Obtener los comercios */}
-    fetch("/api/get-commerces", {
-        method: "GET",
-        headers: {
-        //Authorization: `Bearer ${tokenJWT}`
-        'Content-Type': 'application/json',
-        }
-    })
-       .then((res) => res.json())
-       .then((data) => setCommerces(data))
-
-    {/* Ver si el comercio existe */}
-    const commerceFiltered = commerces.filter((item) => item.email == email.email)
+    {/* Desempaquetar el objeto */}
+    const comercio = objeto.comercio
 
     {/* Mostrar el comercio si existe */}
-    if(commerceFiltered.length > 0){
+    if(comercio != undefined){
 
-        const comercio = commerceFiltered[0]
-
+        {/* Mostrar el comercio si es visible */}
         if(comercio.visible == true){
             return (
                 <div key={comercio.email} className="mt-5 bg-gradient-to-r from-yellow-200 via-green-200 to-green-500 flex flex-col space-y-4 pt-4 pb-6 shadow-xl ring-2 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-7">
