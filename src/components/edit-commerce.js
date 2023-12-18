@@ -113,10 +113,10 @@ export default function EditCommerce(email) {
 
                             {/* Ciudad del comercio */}
                             <div className="flex flex-col space-y-4 mt-5">
-                                <select onChange={(e) => setCity(e.target.value)} name="ciudad" id="ciudad" className="block w-full  py-4 pl-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select defaultValue={"DEFAULT"} onChange={(e) => setCity(e.target.value)} name="ciudad" id="ciudad" className="block w-full  py-4 pl-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                     {/* Placeholder */}
-                                    <option value="" disabled selected hidden>Ciudad</option>
+                                    <option value="DEFAULT" disabled hidden>Ciudad</option>
 
                                     {/* Opciones */}
                                     <option value="Madrid">Madrid</option>
@@ -132,10 +132,10 @@ export default function EditCommerce(email) {
 
                             {/* Filtro de comercios por categoría */}
                             <div className="flex flex-col space-y-4 mt-5">
-                                <select onChange={(e) => setActivity(e.target.value)} name="categoria" id="categoria" className="block w-full py-4 pl-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select defaultValue={"DEFAULT"} onChange={(e) => setActivity(e.target.value)} name="categoria" id="categoria" className="block w-full py-4 pl-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                     {/* Placeholder */}
-                                    <option value="" disabled selected hidden>Categoría</option>
+                                    <option value="DEFAULT" disabled hidden>Categoría</option>
 
                                     {/* Opciones */}
                                     <option value="Alimentación">Alimentación</option>
