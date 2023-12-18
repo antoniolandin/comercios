@@ -1,37 +1,21 @@
 "use client"
 
-import { useState } from "react"
 import ShowCommerce from "@/components/show-commerce"
 
-export default function GetCommerce(email) {
-
-    {/* UseState para guardar el comercio */}
-    const [commerces, setCommerces] = useState([])
-
-    {/* Obtener los comercios */}
-    fetch("/api/get-commerces", {
-        method: "GET",
-        headers: {
-        //Authorization: `Bearer ${tokenJWT}`
-        'Content-Type': 'application/json',
-        }
-    })
-       .then((res) => res.json())
-       .then((data) => setCommerces(data))
-
-
-    {/* Ver si el comercio existe */}
-    const commerceFiltered = commerces.filter((item) => item.email == email.email)
+export default function GetCommerce({comercio}) {
 
     {/* Mostrar el comercio si existe */}
-    if(commerceFiltered.length > 0){
+    if(comercio != undefined){
 
-        const commerce = commerceFiltered[0]
+        const commerce = Object.assign({}, comercio)
 
         const mostrarNegocio = () => {
             if(commerce.visible == false & commerce.city == "" & commerce.summary == "" & commerce.activity == ""){
                 return (
-                    <p className="text-black text-xl">El comercio aun no es visible, para que sea visible rellene la información que falta de su negocio</p>
+                    <div className="sm">
+                        <p className="text-black text-sm">El comercio aun no es visible</p>
+                        <p className="text-black text-sm">para que sea visible rellene la información que falta de su negocio</p>
+                    </div>
                 )
             }
             else{

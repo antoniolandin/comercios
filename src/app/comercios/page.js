@@ -39,8 +39,6 @@ export default function Home() {
     setFetchDone(true)
   }
 
-  console.log(commerce)
-
   return (
     <main>
 
@@ -49,11 +47,11 @@ export default function Home() {
         <div className='flex flex-row space-x-10'>
           <div className='flex flex-col'>          
             <div className="flex-auto mt-10 mb-5">
-              <GetCommerce email={email} />
+              <GetCommerce comercio={commerce} />
             </div>
 
             <div className="flex-auto">
-              <EditCommerce email={email} />
+              <EditCommerce comercio={commerce} setComercio={setCommerce} />
             </div>    
           </div>
 

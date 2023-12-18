@@ -3,45 +3,19 @@
 import { useState } from "react"
 import { useRouter } from 'next/navigation'
 
-export default function EditCommerce(email) {
+export default function EditCommerce({comercio, setComercio}) {
 
-    {/* UseState para guardar los comercios filtrados */}
-    const [commercesFiltered, setCommercesFiltered] = useState([])
-
-    {/* UseState para asegurarse de que solo se hace un fetch de la API */}
-    const [fetchDone, setFetchDone] = useState(false)
-
-    {/* UseState de todas las variables del comercio */}
     const [name, setName] = useState("")
     const [title, setTitle] = useState("")
     const [city, setCity] = useState("")
     const [summary, setSummary] = useState("")
     const [activity, setActivity] = useState("")
-
-    {/* Router para redirigir al usuario */}
     const router = useRouter()
 
-    {/* Obtener los comercios solo al cargar la página */}
-    if (!fetchDone) {
-        {/* Obtener los comercios */}
-        fetch("/api/get-commerces", {
-            method: "GET",
-            headers: {
-            //Authorization: `Bearer ${tokenJWT}`
-            'Content-Type': 'application/json',
-            }
-        })
-           .then((res) => res.json())
-           .then((data) => setCommercesFiltered(data.filter((item) => item.email == email.email)))
-
-        {/* Asegurarse de que el fetch de la API se hace una sola vez */}
-        setFetchDone(true)
-    }
-
     {/* Mostrar el comercio si existe */}
-    if(commercesFiltered.length > 0){
+    if(comercio != undefined){
 
-        const commerce = commercesFiltered[0]
+        const commerce = Object.assign({}, comercio)
 
         {/* Función para editar el comercio */}
         const handleSubmit = (e) => {
@@ -75,6 +49,9 @@ export default function EditCommerce(email) {
             if (name != "" && title != "" && city != "" && summary != "" && activity != "") {
                 commerce.visible = true
             }
+
+            {/* Guardar el comercio en el UseState */}
+            setComercio(commerce)
 
             {/* Enviar el objeto al backend */}
             fetch("/api/edit-commerce", {
