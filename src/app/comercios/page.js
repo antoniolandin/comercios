@@ -4,14 +4,11 @@ import { useSearchParams } from 'next/navigation'
 import GetCommerce from '@/components/get-commerce'
 import EditCommerce from '@/components/edit-commerce'
 
-export default function Usuarios() {
+export default function Home() {
 
+  {/* Obtener el usuario de la URL */}
   const searchParams = useSearchParams()
-
   const email = searchParams.get("email")
-
-  console.log(email)
-
 
   return (
     <main>

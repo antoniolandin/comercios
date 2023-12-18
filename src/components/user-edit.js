@@ -22,10 +22,6 @@ export default function Edit({email}) {
     {/* UseState para asegurarse de que solo se hace un fetch de la API */}
     const [fetchDone, setFetchDone] = useState(false)
 
-    const set = (data) => {
-        setUsuario(data)
-    }
-
     {/* Obtener la información del usuario */}
     if (!fetchDone) {
          {/* Obtener los datos del usuario */}
@@ -38,7 +34,7 @@ export default function Edit({email}) {
             body: JSON.stringify(email)
         })
         .then((res) => res.json())
-        .then((data) => set(data))
+        .then((data) => setUsuario(data))
 
         {/* Asegurarse de que el fetch de la API se hace una sola vez */}
         setFetchDone(true)
@@ -83,8 +79,7 @@ export default function Edit({email}) {
             body: JSON.stringify(user)
         })
             .then((res) => res.json())
-            .then((data) => console.log(data.status))
-            .then(() => console.log(usuario))
+            .then((data) => console.log(data))
 
         setUsuario(user)
     }

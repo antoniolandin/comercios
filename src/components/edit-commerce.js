@@ -86,6 +86,7 @@ export default function EditCommerce(email) {
                 body: JSON.stringify(commerce)
             })
                 .then((res) => res.json())
+                .then((data) => console.log(data))
         }
 
         return (

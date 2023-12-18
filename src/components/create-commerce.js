@@ -13,9 +13,9 @@ export default function Crear({comercios, setComercios, comerciosFiltrados, setC
     const [password, setPassword] = useState("")
 
     {/* Función para mostrar el mensaje de éxito o error */}
-    const mostrarMensaje = (code) => {
-        console.log("Code", code)
-        if (code == 200) {
+    const mostrarMensaje = (data) => {
+        console.log(data)
+        if (data.status == 200) {
             alert("Comercio creado correctamente")
         }
         else{
@@ -49,9 +49,7 @@ export default function Crear({comercios, setComercios, comerciosFiltrados, setC
                 summary: "",
                 activity: "",
                 title: "",
-                score: 0,
-                votes: 0,
-                comments: []
+                reviews: [],
             }
 
             {/* Enviar los datos del formulario al servidor */}
@@ -64,7 +62,7 @@ export default function Crear({comercios, setComercios, comerciosFiltrados, setC
                 body: JSON.stringify(comercio)
             })
                .then((res) => res.json())
-               .then((data) => mostrarMensaje(data.status))
+               .then((data) => mostrarMensaje(data))
     
             {/* Limpiar los campos del formulario */}
             document.getElementById("crear-comercio").reset();

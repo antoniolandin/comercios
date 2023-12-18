@@ -11,9 +11,9 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const redirigir = (code) => {
-        console.log("Code", code)
-        if (code == 200) {
+    const redirigir = (data) => {
+        console.log(data)
+        if (data.status == 200) {
             router.push("/admin")
         }
         else{
@@ -37,7 +37,7 @@ export default function Login() {
             body: JSON.stringify(user)
         })
            .then((res) => res.json())
-           .then((data) => redirigir(data.status))
+           .then((data) => redirigir(data))
     }
 
     return (

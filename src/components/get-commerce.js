@@ -30,9 +30,6 @@ export default function GetCommerce(email) {
 
         const mostrarNegocio = () => {
             if(commerce.visible == false & commerce.city == "" & commerce.summary == "" & commerce.activity == ""){
-
-                console.log(commerce.visible)
-
                 return (
                     <p className="text-black text-xl">El comercio aun no es visible, para que sea visible rellene la información que falta de su negocio</p>
                 )

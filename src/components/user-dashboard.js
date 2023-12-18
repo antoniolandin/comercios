@@ -30,10 +30,11 @@ export default function Dashboard(usuario) {
     {/* Función para guardar los comercios después del fetch de la API*/}
     const set = (data) => {
 
-        const comerciosFiltrados = data.filter((item) => item.visible == true)
-
-        setComercios(comerciosFiltrados)
-        setComerciosFiltrados(comerciosFiltrados)
+        if(data.length > 0){
+            const comerciosFiltrados = data.filter((item) => item.visible == true)
+            setComercios(comerciosFiltrados)
+            setComerciosFiltrados(comerciosFiltrados)
+        }
     }
 
     if(!fetchDone){

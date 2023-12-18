@@ -7,23 +7,39 @@ export default function ShowCommerce({comercio, valorar=false}) {
 
 
     const mostrarValoracion = () => {
-        if(comercio.votes == 0){
+        if(comercio.reviews.length == 0){
             return (
                 <p className="text-slate-700">Este comercio aun no ha sido valorado</p>
             )
         }
         else{
             
-            {/* Dibujar estrellas */}
-            const estrellas = []
+            let scoreGlobal = 0
 
-            for(let i = 0; i < comercio.score; i++){
-                estrellas.push(<i className="text-yellow-400">{FaStar}</i>)
+            for (let i = 0; i < comercio.reviews.length; i++) {
+                const review = comercio.reviews[i];
+                scoreGlobal += review.rating
+            }
+
+            scoreGlobal = Math.round(scoreGlobal / comercio.reviews.length)
+
+            {/* Dibujar las estrellas en función del score */}
+
+            const stars = []
+
+            for (let i = 0; i < 5; i++) {
+                if(i < scoreGlobal){
+                    stars.push(<FaStar key={i} className="text-yellow-500" />)
+                }
+                else{
+                    stars.push(<FaStar key={i} className="text-gray-400" />)
+                }
             }
 
             return (
-                <div className="flex flex-row space-x-1">
-                    {estrellas}
+                <div className="flex items-center">
+                    <p className="text-slate-700">Valoración: </p>
+                    {stars}
                 </div>
             )
 
@@ -71,6 +87,7 @@ export default function ShowCommerce({comercio, valorar=false}) {
                             <p className="text-slate-700">{comercio.summary}</p>
                             <p className="text-slate-700">Actividad: {comercio.activity}</p>
                             <p className="text-slate-700">Ciudad: {comercio.city}</p>
+                            {mostrarValoracion()}
                         </div>
                     </div>  
                 )
