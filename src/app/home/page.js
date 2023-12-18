@@ -10,7 +10,7 @@ export default function Home() {
 
             {/*Título de la página*/} 
             <div className="text-center w-full mb-7">
-                <p className="text-black font-extrabold text-3xl">Bienvenido a la página de inicio</p>
+                <p className="text-black font-extrabold text-3xl">Bienvenid@ a la página de inicio</p>
             </div>
 
             {/*Imágen grande de inicio*/}
