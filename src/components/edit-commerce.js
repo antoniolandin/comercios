@@ -91,9 +91,6 @@ export default function EditCommerce({comercio, setComercio}) {
 
         return (
             <section>
-
-                <Image src="/tmp/ballena.jpg" alt="ballena"  width={500} height={500}/>
-
                 <div className="w-full bg-blue rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 from-gray-900 to-gray-600 bg-gradient-to-r">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 
