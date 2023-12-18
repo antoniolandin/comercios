@@ -50,6 +50,7 @@ export default function Crear({comercios, setComercios, comerciosFiltrados, setC
                 activity: "",
                 title: "",
                 reviews: [],
+                img: "",
             }
 
             {/* Enviar los datos del formulario al servidor */}

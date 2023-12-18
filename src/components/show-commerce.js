@@ -2,6 +2,7 @@
 
 import { FaStar } from "react-icons/fa"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function ShowCommerce({comercio, valorar=false}) {
 
@@ -46,6 +47,14 @@ export default function ShowCommerce({comercio, valorar=false}) {
         }
     }
 
+    const mostrarImagen = () => {
+        if(comercio.img != undefined || comercio.img == ""){
+            return(
+                <Image src={"/" + comercio.img} width={500} height={500} alt="Imagen del comercio"/>
+            )
+        }
+    }
+
 
     {/* Mostrar el comercio si existe */}
     if(comercio != undefined){
@@ -62,8 +71,10 @@ export default function ShowCommerce({comercio, valorar=false}) {
                             <p className="text-slate-700">{comercio.summary}</p>
                             <p className="text-slate-700">Actividad: {comercio.activity}</p>
                             <p className="text-slate-700">Ciudad: {comercio.city}</p>
+
+                            {mostrarImagen()}
                             {mostrarValoracion()}
-                            
+
                             {/* Mostrar el botón de valorar */}
                             <div className="text-center">
                                 <Link href={{pathname: "valorar-comercio", query: {email: comercio.email}, }} >
@@ -87,6 +98,8 @@ export default function ShowCommerce({comercio, valorar=false}) {
                             <p className="text-slate-700">{comercio.summary}</p>
                             <p className="text-slate-700">Actividad: {comercio.activity}</p>
                             <p className="text-slate-700">Ciudad: {comercio.city}</p>
+
+                            {mostrarImagen()}
                             {mostrarValoracion()}
                         </div>
                     </div>  
