@@ -12,9 +12,9 @@ export default function Login() {
     const [password, setPassword] = useState("")
     const [commerces, setCommerces] = useState([])
 
-    const redirigir = (code) => {
-        console.log("Code", code)
-        if (code == 200) {
+    const redirigir = (data) => {
+        console.log(data)
+        if (data.status == 200) {
             router.push("/comercios?email=" + email)
         }
     }
@@ -54,7 +54,7 @@ export default function Login() {
                 body: JSON.stringify(user)
             })
                .then((res) => res.json())
-               .then((data) => redirigir(data.status))
+               .then((data) => redirigir(data))
         }
     }
 
