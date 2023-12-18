@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from 'next/link'
 import ShowCommerce from "@/components/show-commerce"
 
@@ -17,6 +17,15 @@ export default function Dashboard(usuario) {
 
     {/* UseState para asegurarse de que el fetch de la API se hace una sola vez */}
     const [fetchDone, setFetchDone] = useState(false)
+
+    {/* UseState para guardar el texto del buscador */}
+    const [busqueda, setBusqueda] = useState([])
+
+    {/* UseState para guardar la categoría que se filtra */}
+    const [categoria, setCategoria] = useState([])
+
+    {/* UseState para guardar la ciudad que se filtra */}
+    const [ciudad, setCiudad] = useState([])
 
     {/* Función para guardar los comercios después del fetch de la API*/}
     const set = (data) => {
@@ -78,18 +87,30 @@ export default function Dashboard(usuario) {
     {/* Mostrar los comercios si hay comercios */}
     if(comercios.length > 0){
 
-        {/* Buscador de comercios en función del nombre */}
-        const barrabusqueda = (busqueda) => {
+        {/* Filtrar los comercios en función de la barra de búsqueda y de los filtros seleccionados */}
+        const filtrar = (search, category, city) => { {/* No se han usado las variables del UseState directamente porque no se actualizan al instante (funcionan de forma asíncrona) */}
 
-            {/* Si la búsqueda está vacía, mostrar todos los comercios */}
-            if(busqueda == ""){
-                setComerciosFiltrados(comercios)
+            let filtrados = comercios
+
+            {/* Si hay texto en el buscador, filtrar los comercios en función del nombre */}
+            if(search != "" && search != undefined){
+                filtrados = comercios.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
             }
-            else{
-                {/* Filtrar los comercios en función de la búsqueda */}
-                const comerciosFiltrados = comercios.filter((item) => item.name.toLowerCase().includes(busqueda.toLowerCase()))
-                setComerciosFiltrados(comerciosFiltrados)
+
+            {/* Si hay una categoría seleccionada, filtrar los comercios en función de la categoría */}
+            if(category != ""){
+                const comerciosFiltradosCategoria = filtrados.filter((item) => item.activity == category)
+                filtrados = comerciosFiltradosCategoria
             }
+
+            {/* Si hay una ciudad seleccionada, filtrar los comercios en función de la ciudad */}
+            if(city != "" ){
+                const comerciosFiltradosCiudad = comerciosFiltrados.filter((item) => item.city == city)
+                filtrados = comerciosFiltradosCiudad
+            }
+
+            {/* Guardar los comercios filtrados */}
+            setComerciosFiltrados(filtrados)
         }
 
         return (
@@ -98,15 +119,40 @@ export default function Dashboard(usuario) {
                 {/*Mostrar el usuario*/}
                 {mostrarUsuario()}
 
-                {/*Mostrar el buscador de comercios*/}
+                {/* Buscador de comercios por nombre */}
                 <div className="flex flex-col space-y-4 mt-5">
-                    <input onChange={(e) => barrabusqueda(e.target.value)} type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar comercio..." />
+                    <input onChange={(e) => {setBusqueda(e.target.value); filtrar(e.target.value, categoria, ciudad)} } type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar comercio..." />
+                </div>
+
+                {/* Filtro de comercios por categoría */}
+                <div className="flex flex-col space-y-4 mt-5">
+                    <label htmlFor="categoria" className="text-black text-2xl">Filtrar por categoría</label>
+                    <select onChange={(e) => {setCategoria(e.target.value); filtrar(busqueda, e.target.value, ciudad)}} name="categoria" id="categoria" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Todas las categorías</option>
+                        <option value="Alimentación">Alimentación</option>
+                        <option value="Deportes">Deportes</option>
+                        <option value="Muebles">Muebles</option>
+                    </select>
+                </div>
+
+                {/* Buscar por cuidad */}
+                <div className="flex flex-col space-y-4 mt-5">
+                    <label htmlFor="ciudad" className="text-black text-2xl">Buscar por ciudad</label>
+                    <select onChange={(e) => {setCiudad(e.target.value); filtrar(busqueda, categoria, e.target.value)}} name="ciudad" id="ciudad" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Todas las ciudades</option>
+                        <option value="Madrid">Madrid</option>
+                        <option value="Barcelona">Barcelona</option>
+                        <option value="Valencia">Valencia</option>
+                        <option value="Sevilla">Sevilla</option>
+                        <option value="Alicante">Alicante</option>
+                        <option value="Málaga">Málaga</option>
+                        <option value="Jerez">Jerez</option>
+                        <option value="Oviedo">Oviedo</option>
+                    </select>
                 </div>
 
                 <div className="flex flex-col space-y-4">
-
                     {/*Mostrar los comercios*/}
-                    
                     {comerciosFiltrados.map((comercio) => {
                         return (
                             <ShowCommerce key={comercio.email} comercio={comercio} />
@@ -132,8 +178,4 @@ export default function Dashboard(usuario) {
             </section>
         )
     }
-
-
-
-    
 }
