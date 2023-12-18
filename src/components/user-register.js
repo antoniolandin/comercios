@@ -111,7 +111,7 @@ export default function Register() {
 
                     {/* Recibir ofertas */}
                     <div className="flex items-center">
-                        <input onChange={(e) => setReciveOffers(e.target.value)} type="checkbox" name="reciveOffers" id="reciveOffers" className="rounded text-primary-600 focus:ring-primary-600" />
+                        <input onChange={(e) => setReciveOffers(e.target.checked)} type="checkbox" name="reciveOffers" id="reciveOffers" className="rounded text-primary-600 focus:ring-primary-600" />
                         <label htmlFor="reciveOffers" className="ml-2 block text-sm text-white-900">
                             Recibir ofertas
                         </label>
