@@ -25,7 +25,7 @@ export default function ShowUser(usuario) {
                         <p className="text-slate-700">Correo electrónico: {usuario.email}</p>
                         <p className="text-slate-700">Contraseña: {usuario.password}</p>
                         <p className="text-slate-700">Ciudad: {usuario.city}</p>
-                        <p className="text-slate-700">Hobbies: {usuario.hobbies}</p>
+                        <p className="text-slate-700">Interes: {usuario.interest}</p>
                         <p className="text-slate-700">Recibir ofertas: {reciveOffers(usuario.reciveOffers)}</p>
                     </div>
                 </div>

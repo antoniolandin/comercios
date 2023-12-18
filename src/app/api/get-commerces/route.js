@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 
 export async function GET() {
     try{
-        {/*Buscar el comercio*/}
+        {/* Obtener el listado de comercios */}
         const commerce = JSON.parse(readFileSync("data/commerce.txt"))
         
         return NextResponse.json(commerce)
