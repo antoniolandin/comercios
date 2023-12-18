@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import GetCommerce from '@/components/get-commerce'
 import EditCommerce from '@/components/edit-commerce'
@@ -10,6 +11,35 @@ export default function Home() {
   {/* Obtener el usuario de la URL */}
   const searchParams = useSearchParams()
   const email = searchParams.get("email")
+
+  const [commerce, setCommerce] = useState([])
+  const [fetchDone, setFetchDone] = useState(false)
+
+  const set = (data) => {
+
+    if (data.status != 400){
+      setCommerce(data.filter((item) => item.email == email)[0])
+    }
+  }
+
+  {/* Obtener el comercio solo al cargar la página */}
+  if (!fetchDone) {
+    {/* Obtener los comercios */}
+    fetch("/api/get-commerces", {
+      method: "GET",
+      headers: {
+        //Authorization: `Bearer ${tokenJWT}`
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => set(data))
+
+    {/* Asegurarse de que el fetch de la API se hace una sola vez */}
+    setFetchDone(true)
+  }
+
+  console.log(commerce)
 
   return (
     <main>
@@ -29,7 +59,7 @@ export default function Home() {
 
 
           <div className="flex-auto mt-10">
-            <Consultar />
+            <Consultar comercio={commerce}/>
           </div>
 
         </div>
