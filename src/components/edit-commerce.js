@@ -112,18 +112,41 @@ export default function EditCommerce(email) {
                             </div>
 
                             {/* Ciudad del comercio */}
-                            <div>
-                                <input onChange={(e) => setCity(e.target.value)} type="text" name="ciudad" id="ciudad" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ciudad"/>
+                            <div className="flex flex-col space-y-4 mt-5">
+                                <select onChange={(e) => setCity(e.target.value)} name="ciudad" id="ciudad" className="block w-full  py-4 pl-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                    {/* Placeholder */}
+                                    <option value="" disabled selected hidden>Ciudad</option>
+
+                                    {/* Opciones */}
+                                    <option value="Madrid">Madrid</option>
+                                    <option value="Barcelona">Barcelona</option>
+                                    <option value="Valencia">Valencia</option>
+                                    <option value="Sevilla">Sevilla</option>
+                                    <option value="Alicante">Alicante</option>
+                                    <option value="Málaga">Málaga</option>
+                                    <option value="Jerez">Jerez</option>
+                                    <option value="Oviedo">Oviedo</option>
+                                </select>
+                            </div>
+
+                            {/* Filtro de comercios por categoría */}
+                            <div className="flex flex-col space-y-4 mt-5">
+                                <select onChange={(e) => setActivity(e.target.value)} name="categoria" id="categoria" className="block w-full py-4 pl-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                    {/* Placeholder */}
+                                    <option value="" disabled selected hidden>Categoría</option>
+
+                                    {/* Opciones */}
+                                    <option value="Alimentación">Alimentación</option>
+                                    <option value="Deportes">Deportes</option>
+                                    <option value="Muebles">Muebles</option>
+                                </select>
                             </div>
 
                             {/* Resumen del comercio */}
                             <div>
                                 <textarea onChange={(e) => setSummary(e.target.value)} type="text" name="resumen" id="resumen" placeholder="Resumen" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-                            </div>
-
-                            {/* Actividad del comercio */}
-                            <div>
-                                <textarea onChange={(e) => setActivity(e.target.value)} type="text" name="actividad" id="actividad" placeholder="Actividad" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                             </div>
                             
                             {/*Botón para crear el comercio*/}
