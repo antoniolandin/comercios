@@ -16,6 +16,9 @@ export default function Login() {
         if (code == 200) {
             router.push("/admin")
         }
+        else{
+            alert("El correo electrónico o la contraseña son incorrectos.")
+        }
     }
 
     const handleSubmit = (e) => {

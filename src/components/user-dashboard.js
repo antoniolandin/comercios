@@ -163,7 +163,7 @@ export default function Dashboard(usuario) {
                     {/*Mostrar los comercios*/}
                     {comerciosFiltrados.map((comercio) => {
                         return (
-                            <ShowCommerce key={comercio.email} comercio={comercio} />
+                            <ShowCommerce key={comercio.email} comercio={comercio} valorar={usuario.usuario != undefined}/>
                         )
                     })}
                 </div>
