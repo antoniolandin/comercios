@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Link from 'next/link'
 import ShowCommerce from "@/components/show-commerce"
 
@@ -71,6 +71,14 @@ export default function Dashboard(usuario) {
                 <section>
                     <h1 className="text-black text-4xl mb-4">Logueado como:</h1>
                     <h1 className="text-black font-bold text-xl">{user.name} - {user.email}</h1>
+
+                    {/* Mostrar link de editar usuario */}
+
+                    <div className="mt-5">
+                        <h1 className="text-black">Parar editar los detalles de su cuenta o para darse de baja <Link className="text-blue-500 hover:text-blue-800" href={{pathname: "editar-usuario", query: {email: user.email}, }} >haga click aquí</Link></h1>
+                    </div>
+
+
                 </section>
             )
         }
