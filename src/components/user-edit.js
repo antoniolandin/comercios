@@ -162,9 +162,32 @@ export default function Edit({email}) {
                             {/* Botón de editar */}
                             <button type="submit" className="w-full text-black font-semibold bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none rounded-full text-sm px-5 py-2.5 text-center">Editar</button>
                         </form>
-
                     </div>
                 </div>  
+
+                <div className="mt-4 text-center">
+                    <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-20 rounded text-xl" onClick=
+                                        {() => {
+                                                if(confirm('¿Estás seguro de que quieres borrar tu cuenta?')){
+                                                    fetch("/api/delete-user", {
+                                                    method: "DELETE",
+                                                        headers: {
+                                                        //Authorization: `Bearer ${tokenJWT}`
+                                                        'Content-Type': 'application/json',
+                                                        },
+                                                        body: JSON.stringify(usuario)
+                                                    })
+                                                .then((res) => res.json())
+                                                .then((data) => console.log(data))
+
+                                                router.push("login-usuarios")
+                                                }
+                                            }
+                                        }>
+                                            Darse de baja
+                    </button>
+                </div>
+
             </div>
             
         </section>
